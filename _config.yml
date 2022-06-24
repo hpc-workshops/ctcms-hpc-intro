@@ -20,42 +20,39 @@
 # installation. Remember to keep the leading slash on the
 # `snippets` variable below!
 
-snippets: "/snippets_library/ComputeCanada_Graham_slurm"
+snippets: "/snippets_library/NIST_CTCMS_slurm"
 
 local:
   prompt: "[user@laptop ~]$"
-  bash_shebang: "#!/usr/bin/env bash"
+  bash_shebang: "#!/usr/bin/bash"
 
 remote:
-  name: "Graham"
-  login: "graham.computecanada.ca"
-  host: "gra-login1"
-  node: "aci-377"
-  location: "University of Waterloo"
-  homedir: "/home"
+  name: "ruth"
+  login: "ruth.nist.gov"
+  host: "ruth"
+  node: "r001"
+  location: "National Institute of Standards and Technology"
+  homedir: "/users"
   user: "yourUsername"
-  prompt: "[yourUsername@gra-login1 ~]$"
-  module_python3: "python3"
-  bash_shebang: "#!/usr/bin/env bash"
+  prompt: "501 ruth%"
+  bash_shebang: "#!/bin/bash"
 
 sched:
   name: "Slurm"
   submit:
     name: "sbatch"
-    options: ""
+    options: "--partition=serial"
   queue:
-    debug: "debug"
-    testing: "testing"
+    debug: "serial"
+    testing: "fast"
   status: "squeue"
   flag:
     user: "-u yourUsername"
     interactive: ""
-    histdetail: "-l -j"
+    histdetail: "--format=JobID,JobName,Submit,Start,State,ReqCPUS,Reserved,Elapsed,MaxRSS"
     name: "-J"
     time: "-t"
     queue: "-p"
-    nodes: "-N"
-    tasks: "-n"
   del: "scancel"
   interactive: "srun"
   info: "sinfo"
